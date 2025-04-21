@@ -1,43 +1,72 @@
 import React from "react";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, Tabs } from "expo-router";
-import { Pressable } from "react-native";
-
-import Colors from "@/constants/colors";
-
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+import { Tabs } from "expo-router";
+import { Home, User, ClipboardCheck, Briefcase, LogOut } from "lucide-react-native";
+import { colors } from "@/constants/colors";
+import { TouchableOpacity } from "react-native";
+import { useAuthStore } from "@/stores/authStore";
 
 export default function TabLayout() {
+  const { logout } = useAuthStore();
+
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors.light.tint,
-        headerShown: true,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textSecondary,
+        tabBarStyle: {
+          borderTopColor: colors.border,
+          backgroundColor: colors.background,
+        },
+        headerStyle: {
+          backgroundColor: colors.background,
+        },
+        headerTitleStyle: {
+          fontWeight: "600",
+        },
+        headerTintColor: colors.text,
+        headerShadowVisible: false,
+        tabBarLabelStyle: {
+          fontSize: 12,
+        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color, size }) => <User size={size} color={color} />,
           headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors.light.text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+            <TouchableOpacity
+              onPress={logout}
+              style={{ marginRight: 16 }}
+            >
+              <LogOut size={22} color={colors.text} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="assessment"
+        options={{
+          title: "Assessment",
+          tabBarIcon: ({ color, size }) => (
+            <ClipboardCheck size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="results"
+        options={{
+          title: "Careers",
+          tabBarIcon: ({ color, size }) => (
+            <Briefcase size={size} color={color} />
           ),
         }}
       />

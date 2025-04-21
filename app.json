@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-app",
-    "slug": "expo-app",
+    "name": "Smart Career Path Recommender",
+    "slug": "smart-career-path-recommender",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -14,25 +14,18 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "app.rork.smart-career-path-recommender"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "favicon": "./assets/images/favicon.png",
-      "output": "server"
+      },
+      "package": "app.rork.smart-career-path-recommender"
     },
     "plugins": [
-      [
-        "expo-router",
-        {
-          "origin": "https://rork.app/"
-        }
-      ]
+      "expo-router"
     ],
     "experiments": {
       "typedRoutes": true
